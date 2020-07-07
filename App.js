@@ -1,74 +1,50 @@
-import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
-// import Chat from './components/Chat'
-// import {GiftedChat} from 'react-native-gifted-chat';
+import * as React from 'react';
 
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
+import LoginScreen from './screens/LoginScreen'
+import ChatScreen from './screens/ChatScreen'
 
-  componentDidMount() {}
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-  // componentWillMount() {
-  //   this.setState({message: []});
-  // }
+const Stack = createStackNavigator()
 
-  componentWillUnmount() {}
+// const AppNavigator = createStackNavigator(
+//   {
+//     Login: LoginScreen,
+//     Chat: ChatScreen
+//   },
+//   {
+//     headerNode: 'none'
+//   }
+// )
 
-  // reply() {
-  //   return {
-  //     _id: 1,
-  //     text: 'Hello',
-  //     createAt: new Date(),
-  //     user: {
-  //       _id: 2,
-  //       name: 'React Native',
-  //       avatar: 'https://placeimg.com/140/140/any',
-  //     },
-  //   };
-  // }
+// export default createAppContainer(AppNavigator)
 
-  // onSend(messages = []) {
-  //   this.setState(previousState => ({
-  //     messages: GiftedChat.append(
-  //       GiftedChat.append(previousState.messages, messages),
-  //       this.reply(),
-  //     ),
-  //   }));
-  // }
-
-  render() {
-    return(
-      // <GiftedChat 
-      //   messages={this.state.messages}
-      //   onSend={messages => this.onSend(messages)}
-      //   user={{
-      //     _id: 1,
-      //     name: 'you',
-      //     avatar: 'https://placeimg.com/140/140/any'
-      //   }}
-      // />
-      <View style={styles.container}>
-        <Text>Open up App</Text>
-      </View>
-    )
-  }
+export default function App() {
+  return(
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName='Home'
+        screenOptions={{
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#333399'
+          },
+          headerShown: false
+        }}
+        headerMode='float'
+      >
+        <Stack.Screen 
+          name='Home' 
+          component={LoginScreen} 
+        />
+        <Stack.Screen 
+          name='Chat' component={ChatScreen}
+          options={{}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
-
